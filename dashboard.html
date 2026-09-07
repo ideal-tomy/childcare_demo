@@ -2,9 +2,9 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SafeChild DX — 保育支援・報告システム</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>SafeChild DX — 保育の記録と報告</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #F5F3EE;
@@ -31,7 +31,7 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Zen Maru Gothic', 'Hiragino Maru Gothic ProN', 'Hiragino Sans', 'Yu Gothic', sans-serif;
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
@@ -60,17 +60,10 @@ body {
 }
 .logo-home { text-decoration: none; color: inherit; display: block; }
 .logo-home:hover .logo-mark { opacity: 0.85; }
-.logo-back {
-  display: inline-block;
-  margin-top: 10px;
-  font-size: 11px;
-  color: rgba(255,255,255,0.4);
-  text-decoration: none;
-}
-.logo-back:hover { color: rgba(255,255,255,0.75); }
 .logo-mark {
-  font-family: 'DM Serif Display', serif;
-  font-size: 18px;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
   color: #fff;
   letter-spacing: -0.02em;
   line-height: 1.1;
@@ -167,7 +160,7 @@ body {
   padding: 18px 20px;
 }
 .stat-label { font-size: 11px; color: var(--text-3); letter-spacing: 0.04em; }
-.stat-val { font-size: 28px; font-weight: 300; color: var(--text); margin: 4px 0 2px; font-family: 'DM Serif Display', serif; }
+.stat-val { font-size: 26px; font-weight: 700; color: var(--text); margin: 4px 0 2px; }
 .stat-sub { font-size: 11px; color: var(--text-3); }
 .stat-accent { color: var(--accent); }
 .stat-warn { color: var(--gold); }
@@ -219,8 +212,8 @@ body {
   margin-top: 16px;
   border: 1px solid var(--border);
   min-height: 60px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
+  font-family: inherit;
+  font-size: 13px;
 }
 .transcribed.has-text { border-color: var(--accent); }
 
@@ -314,19 +307,26 @@ body {
   display: flex;
   flex-direction: column;
   height: 520px;
+  min-width: 0;
+  max-width: 100%;
 }
+.chat-faq { min-width: 0; }
+.chat-parent { max-width: 560px; min-width: 0; }
 .chat-header {
   padding: 14px 16px;
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
   gap: 10px;
+  min-width: 0;
 }
+.chat-header > div { min-width: 0; }
 .chat-avatar {
   width: 32px; height: 32px;
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-size: 14px;
+  flex-shrink: 0;
 }
 .chat-title { font-size: 13px; font-weight: 500; }
 .chat-sub { font-size: 11px; color: var(--text-3); }
@@ -334,18 +334,23 @@ body {
   flex: 1;
   padding: 16px;
   overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  min-width: 0;
 }
-.msg { display: flex; gap: 8px; }
+.msg { display: flex; gap: 8px; min-width: 0; max-width: 100%; }
 .msg.user { flex-direction: row-reverse; }
+.msg > div { min-width: 0; max-width: 100%; }
 .msg-bubble {
   max-width: 75%;
   padding: 10px 13px;
   border-radius: 12px;
   font-size: 12px;
   line-height: 1.7;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 .msg-bot .msg-bubble { background: var(--bg); border: 1px solid var(--border); }
 .msg-user .msg-bubble { background: var(--accent); color: white; }
@@ -363,9 +368,12 @@ body {
   border-top: 1px solid var(--border);
   display: flex;
   gap: 8px;
+  min-width: 0;
 }
 .chat-input {
   flex: 1;
+  min-width: 0;
+  width: 100%;
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 99px;
@@ -427,7 +435,8 @@ body {
   justify-content: space-between;
   margin-bottom: 16px;
 }
-.section-heading h2 { font-size: 16px; font-weight: 500; }
+.know-link { color: var(--accent); text-decoration: none; font-size: 12px; margin-left: 8px; }
+.know-link:hover { text-decoration: underline; }
 .section-heading p { font-size: 12px; color: var(--text-3); }
 
 /* BTN */
@@ -465,10 +474,147 @@ body {
   transition: all 0.15s;
 }
 .incident-item:hover { border-color: var(--accent); box-shadow: var(--shadow); }
-.incident-time { font-size: 11px; color: var(--text-3); min-width: 70px; font-family: 'JetBrains Mono', monospace; }
+.incident-time { font-size: 11px; color: var(--text-3); min-width: 70px; }
 .incident-child { font-size: 13px; font-weight: 500; }
 .incident-type { font-size: 12px; color: var(--text-2); }
 .incident-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+
+/* TODAY BOARD */
+.board-head { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:18px; }
+.board-kicker { font-size:13px; color:var(--text-2); }
+.board-head h2 { font-size:18px; font-weight:600; letter-spacing:-0.02em; line-height:1.25; }
+.board-toolbar { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 16px; margin-bottom:20px; }
+.board-counts { display:flex; flex-wrap:wrap; gap:8px; }
+.count-chip {
+  display:inline-flex; align-items:baseline; gap:8px;
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:8px 14px; font-size:13px; color:var(--text-2); cursor:pointer; font:inherit;
+}
+.count-chip strong { font-size:20px; color:var(--text); font-weight:600; line-height:1; }
+.count-chip.warn { background:var(--accent-2-light); border-color:rgba(232,93,36,0.28); color:var(--accent-2); }
+.count-chip.warn strong { color:var(--accent-2); }
+.count-chip.follow { background:var(--gold-light); border-color:rgba(201,153,58,0.35); color:#8a6818; }
+.count-chip.follow strong { color:#8a6818; }
+.count-chip .chip-short { display: none; }
+.count-chip.on { outline:2px solid var(--accent); outline-offset:1px; }
+.seg {
+  display:inline-flex; background:var(--surface); border:1px solid var(--border-strong);
+  border-radius:12px; padding:4px; gap:4px;
+}
+.seg button {
+  border:0; background:transparent; color:var(--text-2); font:inherit; font-size:14px; font-weight:500;
+  padding:10px 16px; border-radius:9px; cursor:pointer; min-height:42px;
+}
+.seg button:hover { color:var(--text); background:var(--surface2); }
+.seg button.active { background:var(--accent); color:#fff; }
+.attn { margin-bottom:22px; }
+.attn-h, .group-h {
+  display:flex; align-items:baseline; justify-content:space-between;
+  font-size:15px; font-weight:600; color:var(--text);
+  margin-bottom:10px;
+}
+.attn-h span, .group-h span { font-weight:500; color:var(--text-3); font-size:13px; }
+.attn-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.class-cols { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:14px; align-items:start; }
+.class-col {
+  background:rgba(28,26,22,0.035); border-radius:14px; padding:12px;
+  min-height:120px;
+}
+.class-col .group-h { margin:0 0 10px; padding:2px 4px 0; }
+.pair-cols { display:grid; grid-template-columns:1fr 1fr; gap:14px; align-items:start; }
+.row-list { display:flex; flex-direction:column; gap:8px; }
+.rec-card {
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:12px 14px; display:flex; flex-direction:column; gap:6px;
+  width:100%; text-align:left; font:inherit; color:inherit; cursor:pointer;
+  box-shadow: 0 1px 0 rgba(28,26,22,0.04);
+}
+.rec-card:hover { border-color:var(--accent); box-shadow:var(--shadow); }
+.rec-card.is-pending { background:#FFF7F2; border-color:#f0b89a; }
+.rec-card.is-follow { background:#FDF8EC; border-color:#e3c889; }
+.rec-card-top { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.rec-time { font-size:15px; font-weight:600; font-variant-numeric:tabular-nums; color:var(--text); letter-spacing:-0.02em; }
+.rec-who { font-size:13px; color:var(--text-2); }
+.rec-who b { color:var(--text); font-weight:600; }
+.rec-title { font-size:15px; font-weight:600; line-height:1.45; overflow-wrap:anywhere; }
+.rec-sub { font-size:12px; color:var(--text-3); }
+.rec-card .badge { font-size:12px; padding:5px 10px; }
+.rec-card .cat { font-size:12px; padding:4px 9px; border-radius:6px; }
+.rec-card.has-photo {
+  display:grid; grid-template-columns:96px 1fr; gap:12px; align-items:start;
+}
+.rec-body { min-width:0; display:flex; flex-direction:column; gap:6px; }
+.rec-thumb {
+  width:96px; height:72px; object-fit:cover; border-radius:8px; display:block; background:var(--surface2);
+}
+.rec-flags { display:flex; flex-wrap:wrap; gap:6px; justify-content:flex-end; }
+.doc-photos { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:0 0 16px; }
+.doc-photos figure { margin:0; }
+.doc-photos img {
+  width:100%; height:148px; object-fit:cover; border-radius:8px; display:block; background:var(--surface2);
+}
+.doc-photos figcaption { font-size:12px; color:var(--text-3); margin-top:6px; line-height:1.4; }
+.li-thumb { width:56px; height:56px; object-fit:cover; border-radius:8px; display:block; background:var(--surface2); }
+.cat {
+  display:inline-flex; align-items:center;
+  font-size:12px; font-weight:600; letter-spacing:0.02em; padding:4px 9px; border-radius:6px;
+}
+.cat-園児 { background:var(--accent-light); color:var(--accent); }
+.cat-保護者 { background:var(--info-light); color:var(--info); }
+.cat-設備 { background:var(--gold-light); color:#8a6818; }
+.btn-record { padding:10px 18px; font-size:14px; }
+@media (max-width: 1180px) {
+  .class-cols, .attn-grid, .pair-cols, .doc-photos { grid-template-columns:1fr; }
+}
+
+/* LEDGER */
+.ledger { display:grid; grid-template-columns: minmax(280px, 1fr) minmax(320px, 1.15fr); gap:16px; align-items:start; }
+.ledger-toolbar { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.filter-select {
+  font:inherit; font-size:12px; color:var(--text); background:var(--surface);
+  border:1px solid var(--border-strong); border-radius:var(--radius-sm); padding:6px 10px;
+}
+.ledger-list { display:flex; flex-direction:column; gap:8px; max-height:calc(100vh - 180px); overflow:auto; padding-right:4px; }
+.ledger-item {
+  text-align:left; width:100%; font:inherit; cursor:pointer;
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+  padding:12px 14px;
+}
+.ledger-item.has-photo { display:grid; grid-template-columns:56px 1fr; gap:10px; align-items:start; }
+.ledger-item .li-body { min-width:0; }
+.ledger-item.active { border-color:var(--accent); box-shadow:var(--shadow); background:#f6faf7; }
+.ledger-item .li-top { display:flex; justify-content:space-between; gap:8px; align-items:center; }
+.ledger-item .li-date { font-size:11px; color:var(--text-3); }
+.ledger-item .li-title { font-size:13px; font-weight:500; margin-top:4px; }
+.ledger-item .li-meta { font-size:11px; color:var(--text-2); margin-top:4px; }
+.ledger-detail { position:sticky; top:72px; }
+.doc-empty {
+  background:var(--surface); border:1px dashed var(--border-strong); border-radius:var(--radius);
+  padding:40px 24px; color:var(--text-3); font-size:13px; text-align:center;
+}
+.doc-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); }
+.doc-card .doc-hd {
+  padding:14px 18px; border-bottom:1px solid var(--border);
+  display:flex; justify-content:space-between; gap:12px; align-items:flex-start;
+}
+.doc-card .doc-hd h3 { font-size:15px; font-weight:500; }
+.doc-card .doc-hd p { font-size:12px; color:var(--text-2); margin-top:4px; }
+.doc-body { padding:18px; }
+.doc-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px 16px; margin-bottom:16px; }
+.doc-grid .k { font-size:10px; color:var(--text-3); letter-spacing:0.06em; }
+.doc-grid .v { font-size:13px; font-weight:500; }
+.voice-quote {
+  background:var(--bg); border:1px solid var(--border); border-radius:var(--radius-sm);
+  padding:10px 12px; font-size:12px; color:var(--text-2); line-height:1.8; margin-bottom:14px;
+}
+.voice-quote em { font-style:normal; font-size:10px; color:var(--text-3); display:block; margin-bottom:4px; letter-spacing:0.06em; }
+.doc-sec { font-size:13px; color:var(--text-2); line-height:1.85; margin-bottom:12px; }
+.doc-sec strong { color:var(--text); font-weight:500; display:block; margin-bottom:4px; }
+@media (max-width: 980px) {
+  .ledger { grid-template-columns:1fr; }
+  .ledger-detail { position:static; }
+  .ledger-list { max-height:none; }
+}
 
 /* TABS */
 .tabs {
@@ -489,19 +635,7 @@ body {
 }
 .tab:hover { color: var(--text); }
 .tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 500; }
-
-/* DEMO NOTICE */
-.demo-notice {
-  background: var(--gold-light);
-  border: 1px solid rgba(201,153,58,0.3);
-  border-radius: var(--radius-sm);
-  padding: 8px 14px;
-  font-size: 11px;
-  color: var(--gold);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
+.tab-short { display: none; }
 
 /* ANIMATIONS */
 .fade-in { animation: fadeIn 0.3s ease; }
@@ -513,6 +647,112 @@ body {
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 99px; }
+
+.m-bar, .tabbar, .doc-back { display: none; }
+
+/* ===== PHONE ===== */
+@media (max-width: 733px) {
+  html, body { overflow-x: hidden; }
+  body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
+  .sidebar { display: none; }
+  .main { margin-left: 0; }
+  .topbar { display: none; }
+  .m-bar {
+    display: flex; align-items: center; gap: 10px;
+    position: sticky; top: 0; z-index: 60;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 14px calc(10px + env(safe-area-inset-top, 0px));
+    padding-top: calc(10px + env(safe-area-inset-top, 0px));
+  }
+  .m-bar-home {
+    flex: 1; min-width: 0; text-decoration: none; color: inherit;
+    min-height: 44px; display: flex; flex-direction: column; justify-content: center;
+  }
+  .m-bar-kicker { font-size: 11px; color: var(--text-3); }
+  .m-bar-title { font-size: 16px; font-weight: 600; line-height: 1.3; }
+  .m-bar-cta { padding: 10px 14px; font-size: 14px; min-height: 44px; flex-shrink: 0; }
+  .tabbar {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 80;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .tabbar button {
+    border: 0; background: transparent; font: inherit; color: var(--text-3);
+    min-height: 56px; padding: 8px 4px 6px; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  }
+  .tabbar button span { font-size: 16px; line-height: 1; }
+  .tabbar button em { font-style: normal; font-size: 11px; font-weight: 500; }
+  .tabbar button.on { color: var(--accent); }
+  .page { padding: 16px 14px 20px; max-width: 100%; overflow-x: hidden; }
+  .page-section, .chat-container, .chat-panel, .ledger, .rec-card, .rec-body, .class-col { min-width: 0; max-width: 100%; }
+  #page-dashboard .board-head,
+  #page-reports .board-head,
+  #page-voice .section-heading h2,
+  #page-chat .section-heading h2,
+  #page-knowledge .section-heading h2 { display: none; }
+  .board-toolbar { flex-direction: column; align-items: stretch; gap: 10px; }
+  .board-counts, .seg { flex-wrap: wrap; overflow-x: visible; }
+  .board-counts { display: flex; }
+  .count-chip, .seg button { min-height: 44px; }
+  .count-chip .chip-full { display: none; }
+  .count-chip .chip-short { display: inline; }
+  .seg { width: 100%; }
+  .seg button { flex: 1; min-width: 0; padding: 10px 6px; font-size: 13px; }
+  .class-cols, .attn-grid, .pair-cols, .knowledge-grid, .chat-container, .doc-photos, .doc-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .chat-panel { height: min(58vh, 480px); width: 100%; }
+  .chat-faq {
+    padding: 14px !important;
+  }
+  .chat-faq .btn { white-space: normal; text-align: left; width: 100%; justify-content: flex-start; }
+  .chat-parent { max-width: 100%; }
+  #page-chat { max-width: 100%; overflow-x: hidden; }
+  #page-chat .section-heading,
+  #page-chat .section-heading p { width: 100%; max-width: 100%; overflow-wrap: anywhere; }
+  #page-chat .tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+  #page-chat .tab {
+    min-width: 0;
+    flex-shrink: 1;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 13px;
+    padding: 10px 4px;
+  }
+  #page-chat .tab-full { display: none; }
+  #page-chat .tab-short { display: inline; }
+  #page-chat .chat-header .badge { display: none; }
+  .msg-cite { max-width: 100%; overflow-wrap: anywhere; }
+  .msg-bubble { max-width: 100%; }
+  .tabs { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
+  .tab { flex-shrink: 0; padding: 10px 12px; font-size: 13px; white-space: nowrap; }
+  .section-heading { flex-direction: column; gap: 8px; align-items: flex-start; }
+  .know-link { font-size: 13px; color: var(--accent); }
+  .rec-card.has-photo { grid-template-columns: 72px 1fr; gap: 10px; }
+  .rec-thumb { width: 72px; height: 72px; }
+  .steps { flex-wrap: wrap; }
+  .step { min-width: 30%; }
+  .step::after { display: none; }
+  .report-meta { grid-template-columns: 1fr; }
+  #page-reports:not(.detail-open) .ledger-detail { display: none; }
+  #page-reports.detail-open .ledger > div:first-child { display: none; }
+  .doc-back {
+    display: inline-flex; align-items: center; min-height: 44px;
+    border: 0; background: none; font: inherit; color: var(--accent); cursor: pointer;
+    padding: 0 0 8px; font-size: 14px; font-weight: 500;
+  }
+  .filter-select { min-height: 44px; font-size: 14px; }
+}
 </style>
 </head>
 <body>
@@ -523,42 +763,47 @@ body {
   <div class="sidebar-logo">
     <a class="logo-home" href="index.html">
       <div class="logo-mark">SafeChild<br>DX</div>
-      <div class="logo-sub">保育支援・報告システム</div>
+      <div class="logo-sub">保育の記録と報告</div>
     </a>
-    <a class="logo-back" href="index.html">← トップへ戻る</a>
   </div>
   <div class="sidebar-role">
-    <span>ログイン中</span>
-    <strong>田中 美咲 先生</strong>
+    <span>担当</span>
+    <strong>田中 美咲</strong>
   </div>
   <div class="sidebar-nav">
     <div class="nav-label">メニュー</div>
     <div class="nav-item active" onclick="showPage('dashboard')">
-      <span class="nav-icon">◻</span> ダッシュボード
+      <span class="nav-icon">◻</span> 今日の様子
     </div>
     <div class="nav-item" onclick="showPage('voice')">
-      <span class="nav-icon">🎙</span> 音声入力・記録
+      <span class="nav-icon">🎙</span> 声で記録する
     </div>
     <div class="nav-item" onclick="showPage('reports')">
       <span class="nav-icon">📋</span> 報告書一覧
     </div>
     <div class="nav-item" onclick="showPage('chat')">
-      <span class="nav-icon">💬</span> 対話ボット
+      <span class="nav-icon">💬</span> 質問・相談
     </div>
-    <div class="nav-label">管理</div>
+    <div class="nav-label">資料</div>
     <div class="nav-item" onclick="showPage('knowledge')">
-      <span class="nav-icon">📚</span> ナレッジ基盤
+      <span class="nav-icon">📚</span> 園の決まり・マニュアル
     </div>
   </div>
 </nav>
 
 <!-- MAIN -->
 <div class="main">
+  <div class="m-bar">
+    <a class="m-bar-home" href="index.html">
+      <div class="m-bar-kicker">ひまわり保育園</div>
+      <div class="m-bar-title" id="m-page-title">今日の様子</div>
+    </a>
+    <button type="button" class="btn btn-primary m-bar-cta" onclick="showPage('voice')">記録</button>
+  </div>
   <div class="topbar">
-    <div class="topbar-title" id="page-title">ダッシュボード</div>
+    <div class="topbar-title" id="page-title">今日の様子</div>
     <div class="topbar-right">
-      <div class="demo-notice">🔔 デモモード — AIは接続されていません</div>
-      <span class="badge badge-ok"><span class="dot"></span>ナレッジ: 正常</span>
+      <span class="badge badge-ok"><span class="dot"></span>マニュアル：問題なし</span>
     </div>
   </div>
 
@@ -566,91 +811,45 @@ body {
 
     <!-- ===== DASHBOARD ===== -->
     <div class="page-section active" id="page-dashboard">
-      <div class="stats-row">
-        <div class="stat-card">
-          <div class="stat-label">TODAY'S INCIDENTS</div>
-          <div class="stat-val stat-accent">3</div>
-          <div class="stat-sub">報告書 作成済み</div>
+      <div class="board-head">
+        <div>
+          <div class="board-kicker">ひまわり保育園</div>
+          <h2>9月8日（火）</h2>
         </div>
-        <div class="stat-card">
-          <div class="stat-label">TODAY'S REPORTS</div>
-          <div class="stat-val">3</div>
-          <div class="stat-sub">全て根拠付き</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">KNOWLEDGE REFS</div>
-          <div class="stat-val">12</div>
-          <div class="stat-sub">条文引用（今月）</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">PARENT FAQ</div>
-          <div class="stat-val stat-warn">8</div>
-          <div class="stat-sub">BOT自動対応（今日）</div>
+        <button class="btn btn-primary btn-record" onclick="showPage('voice')">＋ 記録する</button>
+      </div>
+      <div class="board-toolbar">
+        <div class="board-counts" id="board-counts"></div>
+        <div class="seg" id="board-seg">
+          <button type="button" class="active" data-group="class">クラス</button>
+          <button type="button" data-group="time">時間順</button>
+          <button type="button" data-group="teacher">担当</button>
+          <button type="button" data-group="child">子ども</button>
         </div>
       </div>
-
-      <div class="section-heading">
-        <h2>本日の事案記録</h2>
-        <button class="btn btn-primary btn-sm" onclick="showPage('voice')">＋ 新規記録</button>
-      </div>
-
-      <div class="incident-list">
-        <div class="incident-item" onclick="showPage('voice')">
-          <div class="incident-time">10:15</div>
-          <div>
-            <div class="incident-child">A君（4歳）</div>
-            <div class="incident-type">園庭転倒・擦り傷 — 処置済み</div>
-          </div>
-          <div class="incident-right">
-            <span class="badge badge-ok">適切対応</span>
-            <span class="badge badge-info">報告書済</span>
-          </div>
-        </div>
-        <div class="incident-item">
-          <div class="incident-time">13:40</div>
-          <div>
-            <div class="incident-child">Bさん（3歳）</div>
-            <div class="incident-type">食物アレルギー対応確認 — 除去食提供</div>
-          </div>
-          <div class="incident-right">
-            <span class="badge badge-ok">適切対応</span>
-            <span class="badge badge-info">報告書済</span>
-          </div>
-        </div>
-        <div class="incident-item">
-          <div class="incident-time">15:20</div>
-          <div>
-            <div class="incident-child">C君（5歳）</div>
-            <div class="incident-type">友人とのトラブル — 仲裁・保護者連絡</div>
-          </div>
-          <div class="incident-right">
-            <span class="badge badge-warn">要フォロー</span>
-            <span class="badge badge-info">報告書済</span>
-          </div>
-        </div>
-      </div>
+      <div id="board-root"></div>
     </div>
 
     <!-- ===== VOICE INPUT ===== -->
     <div class="page-section" id="page-voice">
       <div class="section-heading">
-        <h2>音声入力・記録</h2>
-        <p>ボタンを押して話すだけで報告書が自動生成されます</p>
+        <h2>声で記録する</h2>
+        <p>ボタンを押して話すと、報告書の下書きができます</p>
       </div>
 
       <div class="voice-panel">
         <div class="voice-header">
-          <h3>🎙 音声メモ入力</h3>
-          <div id="rec-status" class="badge badge-ok"><span class="dot"></span>待機中</div>
+          <h3>🎙 声でメモする</h3>
+          <div id="rec-status" class="badge badge-ok"><span class="dot"></span>準備OK</div>
         </div>
         <div class="voice-body">
           <div class="voice-center">
             <button class="mic-btn" id="mic-btn" onclick="toggleRecording()">🎙</button>
-            <div class="mic-status" id="mic-text">マイクボタンを押して録音開始</div>
+            <div class="mic-status" id="mic-text">マイクを押すと、録音が始まります</div>
           </div>
           <div id="transcript-box" class="transcribed"></div>
           <div id="use-demo-hint" style="text-align:center;margin-top:12px;display:none">
-            <button class="btn btn-primary" onclick="useDemoTranscript()">▶ デモシナリオを使用</button>
+            <button class="btn btn-primary" onclick="useDemoTranscript()">あおとくんの転倒を記録する</button>
           </div>
         </div>
       </div>
@@ -659,15 +858,15 @@ body {
         <div class="steps">
           <div class="step" id="step-1">
             <div class="step-icon">📝</div>
-            <span class="step-label">メモ<br>受信</span>
+            <span class="step-label">メモを<br>受け取る</span>
           </div>
           <div class="step" id="step-2">
             <div class="step-icon">🔍</div>
-            <span class="step-label">ナレッジ<br>照合</span>
+            <span class="step-label">園の決まりと<br>照合</span>
           </div>
           <div class="step" id="step-3">
             <div class="step-icon">✅</div>
-            <span class="step-label">妥当性<br>チェック</span>
+            <span class="step-label">内容の<br>確認</span>
           </div>
           <div class="step" id="step-4">
             <div class="step-icon">📄</div>
@@ -678,41 +877,41 @@ body {
 
       <div id="report-output" style="display:none" class="fade-in">
         <div class="section-heading" style="margin-top:8px">
-          <h2>生成された報告書（下書き）</h2>
+          <h2>報告書の下書き</h2>
           <div style="display:flex;gap:8px">
             <button class="btn btn-sm">✏ 編集</button>
-            <button class="btn btn-primary btn-sm">📤 送信・保存</button>
+            <button class="btn btn-primary btn-sm">📤 保存する</button>
           </div>
         </div>
 
         <div class="report-box">
           <div class="report-header">
-            <h3>📋 インシデント報告書 — 2024年1月15日</h3>
-            <span class="badge badge-ok" style="background:rgba(255,255,255,0.15);color:#fff">AI下書き生成済</span>
+            <h3>📋 けが・事故の報告書 — 2026年9月8日</h3>
+            <span class="badge badge-ok" style="background:rgba(255,255,255,0.15);color:#fff">AIが下書きしました</span>
           </div>
           <div class="report-body">
             <div class="report-meta">
-              <div class="meta-item"><div class="meta-label">児童名</div><div class="meta-val">A君（4歳）</div></div>
-              <div class="meta-item"><div class="meta-label">発生時刻</div><div class="meta-val">10:15</div></div>
+              <div class="meta-item"><div class="meta-label">子どもの名前</div><div class="meta-val">高橋 あおと（4歳）</div></div>
+              <div class="meta-item"><div class="meta-label">時刻</div><div class="meta-val">10:15</div></div>
               <div class="meta-item"><div class="meta-label">場所</div><div class="meta-val">園庭</div></div>
-              <div class="meta-item"><div class="meta-label">担当保育士</div><div class="meta-val">田中 美咲</div></div>
+              <div class="meta-item"><div class="meta-label">担当</div><div class="meta-val">田中 美咲</div></div>
             </div>
 
             <div class="evidence-box">
-              <span class="evidence-icon">📌</span><strong>根拠ルール照合済：</strong>
-              当園安全管理マニュアル 第3章-2「擦過傷の応急処置手順」に基づき、流水洗浄・保護を実施。
-              対応は<strong>適切</strong>と判定されました。
+              <span class="evidence-icon">📌</span><strong>園のマニュアルと照らして確認済み：</strong>
+              安全管理マニュアル 第3章-2「すり傷の手当」に沿って、水道で洗い、ばんそうこうを貼った。
+              園の手順どおりの対応でした。
             </div>
 
             <div class="report-text">
-              <p><strong>【事象の概要】</strong></p>
-              <p>10時15分頃、A君が園庭においてかけっこ中に転倒し、右膝に擦り傷を負った。</p>
+              <p><strong>【何が起きたか】</strong></p>
+              <p>10時15分ごろ、あおとくんが園庭でかけっこ中に転んで、右ひざをすりむいた。</p>
               <br>
-              <p><strong>【対応内容】</strong></p>
-              <p>直ちに水道水で患部を洗浄し、絆創膏を貼付した。A君はその後泣き止み、通常の活動に戻った。バイタルサインに異常は認められなかった。</p>
+              <p><strong>【対応】</strong></p>
+              <p>すぐに水道で傷を洗い、ばんそうこうを貼った。あおとくんはその後泣きやみ、また遊びに戻った。顔色もよく、いつもどおり遊べていた。</p>
               <br>
-              <p><strong>【保護者向け連絡文案】</strong></p>
-              <p>本日10時15分頃、園庭活動中にA君が転倒し、右膝に軽度の擦り傷を負いました。<strong>当園安全管理マニュアルの基準に則り、適切に処置</strong>いたしましたのでご安心ください。その後は元気に活動を続けております。</p>
+              <p><strong>【保護者への連絡文（下書き）】</strong></p>
+              <p>本日10時15分ごろ、園庭で遊んでいるときにあおとくんが転んで、右ひざに軽いすり傷ができました。園で決めている手順で、洗ってばんそうこうを貼りました。その後は元気に遊んでいます。</p>
             </div>
           </div>
         </div>
@@ -721,57 +920,46 @@ body {
 
     <!-- ===== REPORTS ===== -->
     <div class="page-section" id="page-reports">
-      <div class="section-heading">
-        <h2>報告書一覧</h2>
-        <button class="btn btn-sm">📥 エクスポート</button>
+      <div class="board-head">
+        <div>
+          <h2>報告書</h2>
+        </div>
       </div>
-      <div class="incident-list">
-        <div class="incident-item">
-          <div class="incident-time">今日<br>10:15</div>
-          <div>
-            <div class="incident-child">A君 — 転倒・擦り傷</div>
-            <div class="incident-type">📌 安全管理マニュアル3-2 引用</div>
+      <div class="ledger">
+        <div>
+          <div class="ledger-toolbar">
+            <select class="filter-select" id="filter-cat" onchange="renderReports()">
+              <option value="all">種類（すべて）</option>
+              <option value="園児">園児</option>
+              <option value="保護者">保護者</option>
+              <option value="設備">設備</option>
+            </select>
+            <select class="filter-select" id="filter-status" onchange="renderReports()">
+              <option value="all">状態（すべて）</option>
+              <option value="review">園長の確認待ち</option>
+              <option value="follow">あとで確認</option>
+              <option value="matched">マニュアル確認済み</option>
+              <option value="notified">保護者に伝えた</option>
+              <option value="draft">下書き</option>
+            </select>
           </div>
-          <div class="incident-right">
-            <span class="badge badge-ok">適切対応</span>
-            <span class="badge badge-info">保護者通知済</span>
-          </div>
+          <div class="ledger-list" id="ledger-list"></div>
         </div>
-        <div class="incident-item">
-          <div class="incident-time">今日<br>13:40</div>
-          <div>
-            <div class="incident-child">Bさん — アレルギー対応</div>
-            <div class="incident-type">📌 アレルギー対応基準4-1 引用</div>
-          </div>
-          <div class="incident-right">
-            <span class="badge badge-ok">適切対応</span>
-            <span class="badge badge-info">保護者通知済</span>
-          </div>
-        </div>
-        <div class="incident-item">
-          <div class="incident-time">昨日<br>14:00</div>
-          <div>
-            <div class="incident-child">D君 — 発熱対応</div>
-            <div class="incident-type">📌 保育所保育指針 第3章 引用</div>
-          </div>
-          <div class="incident-right">
-            <span class="badge badge-ok">適切対応</span>
-            <span class="badge badge-info">保護者通知済</span>
-          </div>
-        </div>
+        <div class="ledger-detail" id="ledger-detail"></div>
       </div>
     </div>
 
     <!-- ===== CHAT BOT ===== -->
     <div class="page-section" id="page-chat">
       <div class="section-heading">
-        <h2>対話ボット</h2>
-        <p>職員用・保護者用それぞれのチャットインターフェース</p>
+        <h2>質問・相談</h2>
+        <p>職員用と保護者用、それぞれのやり取り画面</p>
+        <a class="know-link" href="#knowledge" onclick="showPage('knowledge');return false;">園の決まりを見る</a>
       </div>
 
       <div class="tabs">
-        <div class="tab active" onclick="switchTab(this,'tab-staff')">👩‍🏫 職員用（判断支援）</div>
-        <div class="tab" onclick="switchTab(this,'tab-parent')">👨‍👩‍👧 保護者用（FAQ）</div>
+        <div class="tab active" onclick="switchTab(this,'tab-staff')"><span class="tab-full">👩‍🏫 職員用（対応の確認）</span><span class="tab-short">職員用</span></div>
+        <div class="tab" onclick="switchTab(this,'tab-parent')"><span class="tab-full">👨‍👩‍👧 保護者用（よくある質問）</span><span class="tab-short">保護者用</span></div>
       </div>
 
       <div id="tab-staff" class="chat-container" style="display:grid">
@@ -779,15 +967,15 @@ body {
           <div class="chat-header">
             <div class="chat-avatar" style="background:var(--accent-light);color:var(--accent)">AI</div>
             <div>
-              <div class="chat-title">職員サポートBot</div>
-              <div class="chat-sub">ルール照合 · 判断支援</div>
+              <div class="chat-title">職員用の相談</div>
+              <div class="chat-sub">園の決まりと照らし合わせる</div>
             </div>
             <span class="badge badge-info" style="margin-left:auto">職員のみ</span>
           </div>
           <div class="chat-messages" id="staff-msgs">
             <div class="msg msg-bot">
               <div class="msg-bubble">
-                こんにちは、田中先生。本日の状況について質問があればどうぞ。園のルールに基づいてお答えします。
+                こんにちは、田中先生。今日のことで聞きたいことがあればどうぞ。園の決まりを見て答えます。
               </div>
             </div>
             <div class="msg msg-user">
@@ -796,58 +984,58 @@ body {
             <div class="msg msg-bot">
               <div>
                 <div class="msg-bubble">
-                  当園の安全管理マニュアル第3章に基づくと、軽度の擦過傷（流水洗浄+保護で対応済み）の場合、<strong>電話連絡は必須ではなく</strong>、お迎え時の口頭報告＋連絡帳記載で対応可能です。
+                  園のけがの決まりでは、軽いすり傷（水道で洗ってばんそうこうを貼済み）の場合、<strong>電話は必須ではなく</strong>、お迎えのときに話して、連絡帳にも書けばよいです。
                 </div>
-                <span class="msg-cite">📌 安全管理マニュアル 3-2「軽傷の連絡基準」</span>
+                <span class="msg-cite">📌 安全管理マニュアル 3-2「軽いけがの連絡」</span>
               </div>
             </div>
           </div>
           <div class="chat-input-row">
-            <input class="chat-input" id="staff-input" type="text" placeholder="ルールを確認したい場合は入力してください..." onkeydown="if(event.key==='Enter')sendStaffMsg()">
+            <input class="chat-input" id="staff-input" type="text" placeholder="聞きたいことを書いてください..." onkeydown="if(event.key==='Enter')sendStaffMsg()">
             <button class="send-btn" onclick="sendStaffMsg()">↑</button>
           </div>
         </div>
 
-        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;">
-          <div style="font-size:12px;color:var(--text-3);margin-bottom:12px;">よくある質問（クイック入力）</div>
+        <div class="chat-faq" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;">
+          <div style="font-size:12px;color:var(--text-3);margin-bottom:12px;">よくある質問</div>
           <div style="display:flex;flex-direction:column;gap:8px;">
-            <button class="btn btn-sm" onclick="setStaffQ('この対応はルール上正しいですか？')">この対応はルール上正しいですか？</button>
+            <button class="btn btn-sm" onclick="setStaffQ('この対応で、園の決まりは大丈夫ですか？')">この対応で、園の決まりは大丈夫ですか？</button>
             <button class="btn btn-sm" onclick="setStaffQ('保護者に電話すべきタイミングは？')">保護者に電話すべきタイミングは？</button>
-            <button class="btn btn-sm" onclick="setStaffQ('アレルギー児の給食対応ルールを教えて')">アレルギー児の給食対応ルールを教えて</button>
+            <button class="btn btn-sm" onclick="setStaffQ('アレルギーのある子の給食の決まりは？')">アレルギーのある子の給食の決まりは？</button>
             <button class="btn btn-sm" onclick="setStaffQ('発熱した場合の対応手順は？')">発熱した場合の対応手順は？</button>
           </div>
           <div class="evidence-box" style="margin-top:16px">
-            <strong>📌 本日の引用ルール</strong><br>
-            安全管理マニュアル 3-2（転倒処置）<br>
+            <strong>📌 今日参照した決まり</strong><br>
+            安全管理マニュアル 3-2（転んだときの手当）<br>
             保育指針 第2章-3（健康管理）
           </div>
         </div>
       </div>
 
       <div id="tab-parent" style="display:none">
-        <div style="max-width:560px">
-          <div class="chat-panel" style="height:480px">
+        <div class="chat-parent">
+          <div class="chat-panel">
             <div class="chat-header">
               <div class="chat-avatar" style="background:var(--info-light);color:var(--info)">🌸</div>
               <div>
-                <div class="chat-title">ひまわり保育園 FAQチャット</div>
-                <div class="chat-sub">保護者の方はこちらにご質問ください</div>
+                <div class="chat-title">ひまわり保育園への質問</div>
+                <div class="chat-sub">持ち物やお迎えなど、どうぞ</div>
               </div>
             </div>
             <div class="chat-messages" id="parent-msgs">
               <div class="msg msg-bot">
                 <div class="msg-bubble">
-                  こんにちは！ひまわり保育園FAQチャットです。園のルール・行事・持ち物などについてお気軽にご質問ください。
+                  ひまわり保育園です。行事や持ち物のことなど、聞いてください。
                 </div>
               </div>
             </div>
             <div class="chat-input-row">
-              <input class="chat-input" id="parent-input" type="text" placeholder="質問を入力してください..." onkeydown="if(event.key==='Enter')sendParentMsg()">
+              <input class="chat-input" id="parent-input" type="text" placeholder="質問を書いてください..." onkeydown="if(event.key==='Enter')sendParentMsg()">
               <button class="send-btn" onclick="sendParentMsg()">↑</button>
             </div>
           </div>
           <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;">
-            <button class="btn btn-sm" onclick="setParentQ('アレルギーの除去食はどうなりますか？')">アレルギーの除去食は？</button>
+            <button class="btn btn-sm" onclick="setParentQ('アレルギーの給食はどうなりますか？')">アレルギーの給食は？</button>
             <button class="btn btn-sm" onclick="setParentQ('お迎えの時間変更はいつまでに連絡すれば？')">お迎え時間の変更は？</button>
             <button class="btn btn-sm" onclick="setParentQ('発表会の持ち物は何ですか？')">発表会の持ち物は？</button>
             <button class="btn btn-sm" onclick="setParentQ('熱が何度から連絡が来ますか？')">熱が何度で連絡来ますか？</button>
@@ -859,49 +1047,49 @@ body {
     <!-- ===== KNOWLEDGE ===== -->
     <div class="page-section" id="page-knowledge">
       <div class="section-heading">
-        <h2>ナレッジ基盤（Source of Truth）</h2>
-        <button class="btn btn-sm">＋ ファイル追加</button>
+        <h2>園の決まり・マニュアル</h2>
+        <button class="btn btn-sm">＋ 資料を足す</button>
       </div>
 
       <div class="knowledge-grid">
         <div class="know-card">
-          <div class="know-type">法的ナレッジ</div>
+          <div class="know-type">法令</div>
           <div class="know-title">📖 保育所保育指針・法令</div>
           <ul class="know-list">
-            <li>保育所保育指針（2018年改定）<span class="know-tag badge badge-ok">有効</span></li>
-            <li>児童福祉法（最終改正版）<span class="know-tag badge badge-ok">有効</span></li>
-            <li>学校保健安全法 関連条文<span class="know-tag badge badge-ok">有効</span></li>
-            <li>食品衛生法 アレルギー対応<span class="know-tag badge badge-ok">有効</span></li>
+            <li>保育所保育指針<span class="know-tag badge badge-ok">現行</span></li>
+            <li>児童福祉法<span class="know-tag badge badge-ok">現行</span></li>
+            <li>子どもの健康・安全に関する法令<span class="know-tag badge badge-ok">現行</span></li>
+            <li>食品衛生法（アレルギー）<span class="know-tag badge badge-ok">現行</span></li>
           </ul>
         </div>
         <div class="know-card">
-          <div class="know-type">施設ナレッジ</div>
-          <div class="know-title">🏫 ひまわり保育園 内規</div>
+          <div class="know-type">園の決まり</div>
+          <div class="know-title">🏫 ひまわり保育園の決まり</div>
           <ul class="know-list">
             <li>安全管理マニュアル（v3.2）<span class="know-tag badge badge-ok">最新</span></li>
-            <li>アレルギー対応基準書<span class="know-tag badge badge-ok">最新</span></li>
-            <li>緊急時対応手順<span class="know-tag badge badge-ok">最新</span></li>
-            <li>保護者連絡ガイドライン<span class="know-tag badge badge-warn">更新推奨</span></li>
+            <li>アレルギー対応の基準<span class="know-tag badge badge-ok">最新</span></li>
+            <li>緊急のときの流れ<span class="know-tag badge badge-ok">最新</span></li>
+            <li>保護者への連絡の決まり<span class="know-tag badge badge-warn">要見直し</span></li>
           </ul>
         </div>
         <div class="know-card">
-          <div class="know-type">引用実績（今月）</div>
-          <div class="know-title">📊 よく参照されるルール</div>
+          <div class="know-type">よく見た決まり（今月）</div>
+          <div class="know-title">📊 よく見る決まり</div>
           <ul class="know-list">
-            <li>安全管理 3-2 擦過傷処置<span class="know-tag badge badge-info">7回</span></li>
+            <li>安全管理 3-2 すり傷の手当<span class="know-tag badge badge-info">7回</span></li>
             <li>アレルギー対応 4-1<span class="know-tag badge badge-info">5回</span></li>
             <li>保育指針 第2章-3 健康管理<span class="know-tag badge badge-info">4回</span></li>
-            <li>緊急連絡 判断基準<span class="know-tag badge badge-info">3回</span></li>
+            <li>いつ保護者に連絡するか<span class="know-tag badge badge-info">3回</span></li>
           </ul>
         </div>
         <div class="know-card">
-          <div class="know-type">ステータス</div>
-          <div class="know-title">⚙ システム状態</div>
+          <div class="know-type">いまの状態</div>
+          <div class="know-title">⚙ いまの状態</div>
           <ul class="know-list">
-            <li>RAGインデックス<span class="know-tag badge badge-ok">正常</span></li>
+            <li>マニュアルの検索<span class="know-tag badge badge-ok">問題なし</span></li>
             <li>最終更新<span class="know-tag" style="font-size:10px;padding:2px 7px">2024/1/10</span></li>
-            <li>文書数<span class="know-tag" style="font-size:10px;padding:2px 7px">8件</span></li>
-            <li>チャンク数<span class="know-tag" style="font-size:10px;padding:2px 7px">342</span></li>
+            <li>資料の数<span class="know-tag" style="font-size:10px;padding:2px 7px">8件</span></li>
+            <li>項目数<span class="know-tag" style="font-size:10px;padding:2px 7px">342</span></li>
           </ul>
         </div>
       </div>
@@ -909,34 +1097,540 @@ body {
 
   </div><!-- /page -->
 </div><!-- /main -->
+<nav class="tabbar" id="tabbar">
+  <button type="button" data-page="dashboard" class="on" onclick="showPage('dashboard')"><span>◻</span><em>今日</em></button>
+  <button type="button" data-page="voice" onclick="showPage('voice')"><span>🎙</span><em>記録</em></button>
+  <button type="button" data-page="reports" onclick="showPage('reports')"><span>📋</span><em>報告書</em></button>
+  <button type="button" data-page="chat" onclick="showPage('chat')"><span>💬</span><em>相談</em></button>
+</nav>
 </div><!-- /app -->
 
 <script>
 // --- NAVIGATION ---
 const pageTitles = {
-  dashboard:'ダッシュボード',
-  voice:'音声入力・記録',
+  dashboard:'今日の様子',
+  voice:'声で記録する',
   reports:'報告書一覧',
-  chat:'対話ボット',
-  knowledge:'ナレッジ基盤'
+  chat:'質問・相談',
+  knowledge:'園の決まり・マニュアル'
 };
 function showPage(id) {
   if(!pageTitles[id]) id = 'dashboard';
+  if(id !== 'reports') {
+    document.getElementById('page-reports')?.classList.remove('detail-open');
+  }
   document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>{
     if(n.textContent.includes(pageTitles[id].slice(0,4))) n.classList.add('active');
   });
+  document.querySelectorAll('#tabbar button').forEach(b => {
+    b.classList.toggle('on', b.dataset.page === id || (id === 'knowledge' && b.dataset.page === 'chat'));
+  });
   document.getElementById('page-title').textContent = pageTitles[id];
+  const mTitle = document.getElementById('m-page-title');
+  if (mTitle) mTitle.textContent = id === 'dashboard' ? '9月8日（火）' : pageTitles[id];
   const nextHash = '#' + id;
   if(location.hash !== nextHash) history.replaceState(null, '', nextHash);
+  if(id === 'dashboard') renderBoard();
+  if(id === 'reports') renderReports();
 }
 
 function applyHash() {
   const id = (location.hash || '#dashboard').slice(1);
   if(pageTitles[id]) showPage(id);
 }
+
+const TODAY = '2026-09-08';
+const STATUS_LABEL = {
+  draft:'下書き',
+  matched:'マニュアル確認済み',
+  review:'園長の確認待ち',
+  notified:'保護者に伝えた',
+  follow:'あとで確認'
+};
+const STATUS_BADGE = {
+  draft:'badge-warn',
+  matched:'badge-info',
+  review:'badge-alert',
+  notified:'badge-ok',
+  follow:'badge-warn'
+};
+const CLASS_ORDER = ['ひよこ組','うさぎ組','りす組','設備'];
+const records = [
+  {
+    id:'hana-absent',
+    date:TODAY, dateLabel:'今日', time:'08:12',
+    child:'佐藤 はな', age:'1歳', className:'ひよこ組', teacher:'山本 恵',
+    category:'保護者', title:'欠席連絡（朝から熱っぽい）', place:'電話',
+    summary:'お母さんから電話。夜に37.5℃、今朝も元気がないので欠席。出欠と連絡帳に書いた。',
+    evidence:'保護者への連絡の決まり 3-1「欠席の受付」',
+    status:'notified',
+    voice:'はなちゃん、お母さんから電話。昨夜ちょっと熱出て、今朝も元気ないので休ませます、とのこと。',
+    overview:'お母さんから、佐藤はなちゃん（ひよこ組）が今日欠席の連絡。夜に37.5℃の熱があり、朝も食欲がなく機嫌が悪いとのこと。',
+    response:'出欠と連絡帳の両方に、休みと書いた。朝の人数にも入れた。次に来るときは、朝の熱を確認するよう伝えた。',
+    parentNote:'ご連絡ありがとうございました。お休みで記録しています。次に来るときは、朝の熱を教えてください。'
+  },
+  {
+    id:'akari-pickup',
+    date:TODAY, dateLabel:'今日', time:'08:40',
+    child:'松本 あかり', age:'5歳', className:'りす組', teacher:'加藤 直子',
+    category:'保護者', title:'お迎えを17:30から16:30に変更', place:'アプリ',
+    summary:'おばあちゃんが16:30にお迎え。14時より前の連絡だったので受け付けた。延長なし。',
+    evidence:'保護者への連絡の決まり 3-2「お迎え時間の変更」',
+    status:'notified',
+    voice:'あかりちゃん、今日はおばあちゃんが4時半にお迎え。延長なし。',
+    overview:'保護者アプリから、松本あかりちゃん（りす組）のお迎え変更。いつもは17:30、今日は16:30。お迎えはおばあちゃん。',
+    response:'14時より前だったので、変更を受け付けた。延長保育はやめ、お迎えの一覧を更新した。担任にも口で伝えた。',
+    parentNote:'16:30におばあちゃんがお迎えと受け付けました。変更は、当日14時までアプリかお電話で受け付けています。'
+  },
+  {
+    id:'riku-health',
+    date:TODAY, dateLabel:'今日', time:'09:05',
+    child:'渡辺 りく', age:'0歳', className:'ひよこ組', teacher:'山本 恵',
+    category:'園児', title:'朝の様子、いつもより機嫌が悪い', place:'0歳児室',
+    summary:'体温36.8℃。ミルクは普段どおり。元気がないので、午前は様子を見る。',
+    evidence:'保育所保育指針 第2章-3「健康観察」',
+    status:'matched',
+    voice:'りくくん、朝の検温36.8。ミルクは飲んだけど、いつもよりぐずりやすい。様子見します。',
+    overview:'登園時の健康チェックで、渡辺りくくん（ひよこ組）の機嫌が普段より落ち着かない。体温36.8℃。息づかいも顔色もいつもどおり。',
+    response:'朝の健康チェックとして記録した。午前は抱っこを多めにし、37.5℃になったら保護者に連絡する、と申し送りに書いた。',
+    parentNote:'朝は少しぐずりがありましたが、体温は36.8℃でミルクも飲めました。午後の様子もあわせてお伝えします。'
+  },
+  {
+    id:'aoto-fall',
+    date:TODAY, dateLabel:'今日', time:'10:15',
+    child:'高橋 あおと', age:'4歳', className:'うさぎ組', teacher:'田中 美咲',
+    category:'園児', title:'園庭で転んで、右ひざをすりむいた', place:'園庭',
+    summary:'かけっこ中に転んだ。水道で洗ってばんそうこう。泣きやんで遊びに戻る。園長の確認待ち。',
+    evidence:'安全管理マニュアル 3-2「すり傷の手当」',
+    status:'review',
+    voice:'10時15分、あおとくん、園庭でかけっこ中に転んだ。右ひざすり傷。水道で洗って、ばんそうこう。泣きやんで遊びに戻る。',
+    overview:'10時15分ごろ、あおとくん（うさぎ組）が園庭でかけっこ中に転んで、右ひざをすりむいた。血は少しだけ。頭を打った様子はなく、自分で歩けていた。',
+    response:'園のけがの手順どおり、水道で洗ってばんそうこうを貼った。その後泣きやみ、また遊びに戻った。顔色もよく、いつもどおり。軽いけがなので、電話はせず、お迎えのときと連絡帳で伝える。',
+    parentNote:'本日10時15分ごろ、園庭で遊んでいるときにあおとくんが転んで、右ひざに軽いすり傷ができました。園で決めている手順で、洗ってばんそうこうを貼りました。その後は元気に過ごしています。お迎えの際にもご説明します。'
+  },
+  {
+    id:'sota-fever',
+    date:TODAY, dateLabel:'今日', time:'10:42',
+    child:'鈴木 そうた', age:'1歳', className:'ひよこ組', teacher:'山本 恵',
+    category:'園児', title:'熱37.8℃。保護者に電話した', place:'ひよこ組保育室',
+    summary:'検温37.8℃。別室で休ませ、お母さんに電話した。お迎え待ち。園長の確認待ち。',
+    evidence:'安全管理マニュアル 5-1「発熱時対応」',
+    status:'review',
+    voice:'そうたくん、37.8度。お母さんに電話した。静かに寝かせてお迎え待ち。',
+    overview:'午前に測り直したら、鈴木そうたくん（ひよこ組）が37.8℃。元気がなかった。ほかの子と離すため、静かな部屋へ移した。',
+    response:'37.5℃以上なので、すぐに保護者へ電話した。お母さんと10:48に話し、11:30ごろお迎え予定。15分おきに熱を測り、水分も記録している。',
+    parentNote:'10時42分の検温で37.8℃を確認したため、お電話しました。静かな部屋で休ませています。お迎えをお願いします。'
+  },
+  {
+    id:'mio-allergy',
+    date:TODAY, dateLabel:'今日', time:'11:30',
+    child:'伊藤 みお', age:'3歳', className:'うさぎ組', teacher:'田中 美咲',
+    category:'園児', title:'給食は卵なし。みおちゃんのトレーで出した', place:'給食室からうさぎ組',
+    summary:'卵を抜いた給食を、みおちゃんのトレーで出した。田中と調理で二人確認済み。',
+    evidence:'アレルギー対応の基準 4-1「アレルギーの給食の出し方」',
+    status:'notified',
+    voice:'みおちゃん、今日の給食は卵抜き。みおちゃんのトレーで、調理の佐藤さんと二人で確認して渡した。',
+    overview:'伊藤みおちゃん（うさぎ組）は卵アレルギー。今日の献立に卵のメニューがあったので、卵を抜いた給食を用意した。',
+    response:'アレルギーの出し方どおり、一覧と献立を確認し、みおちゃんのトレーに盛った。出す前に担任と調理で二人確認。渡し間違いなし。食べたあと、様子に変わりなし。',
+    parentNote:'今日の給食は卵を使わず用意し、出す前に担任と調理で確認しました。食べたあとも、いつもと変わりありません。',
+    photos:[
+      { src:'images/tray-wide.png', caption:'11:30 撮影 · みおちゃんのトレー（卵なし）' },
+      { src:'images/tray-check.png', caption:'担任と調理の確認表' }
+    ]
+  },
+  {
+    id:'yui-nap',
+    date:TODAY, dateLabel:'今日', time:'13:10',
+    child:'小林 ゆい', age:'4歳', className:'うさぎ組', teacher:'田中 美咲',
+    category:'園児', title:'お昼寝のあとぐずり、お茶を飲ませた', place:'うさぎ組保育室',
+    summary:'起きにくく泣いた。お茶と抱っこで10分ほどで落ち着いた。軽いので連絡帳に書く。',
+    evidence:'保育所保育指針 第2章-3「午睡後の観察」',
+    status:'matched',
+    voice:'ゆいちゃん、お昼寝起きてぐずった。お茶飲んで抱っこしたら落ち着いた。熱はない。',
+    overview:'お昼寝のあとに小林ゆいちゃん（うさぎ組）が起きにくく、約5分泣いた。体温36.6℃。次の遊びに入るのが少し遅れただけ。',
+    response:'お茶を飲ませ、静かな場所で気持ちを切り替えた。10分後に好きな遊びに戻った。連絡帳に書いておけばよいと判断した。',
+    parentNote:'お昼寝のあとに少しぐずりがありましたが、お茶を飲んですぐ落ち着きました。熱はありません。'
+  },
+  {
+    id:'tent-peg',
+    date:TODAY, dateLabel:'今日', time:'13:50',
+    child:'—', age:'', className:'設備', teacher:'高橋 誠',
+    category:'設備', title:'日よけテントの角が浮いている', place:'園庭砂場脇',
+    summary:'日よけテントの一角が緩んでいた。杭を打ち直し、砂袋で仮に固定した。',
+    evidence:'安全管理マニュアル 7-1「遊具・テントの異常時」',
+    status:'notified',
+    voice:'テントの角がふわっと浮いてる。ペグ打ち直して砂袋置いた。',
+    overview:'お昼寝のあと園庭の準備中、日よけテントの南西の角がたるみ、留め具が砂から浮いているのを確認した。子どもが使う前だった。',
+    response:'すぐに使うのをやめ、杭を打ち直して砂袋を置いた。全クラスに口で伝えた。今日の外遊びでは使ってよい。直した写真を修理の記録に残した。',
+    parentNote:'園庭の日よけテントに緩みがあったため、留め直しました。いまは普段どおり使っています。',
+    photos:[
+      { src:'images/tent-wide.png', caption:'13:50 撮影 · たるんだテントの角' },
+      { src:'images/tent-peg.png', caption:'砂から浮いた留め具' }
+    ]
+  },
+  {
+    id:'slide-loose',
+    date:TODAY, dateLabel:'今日', time:'14:05',
+    child:'—', age:'', className:'設備', teacher:'高橋 誠',
+    category:'設備', title:'園庭のすべり台の足元がぐらつく', place:'園庭',
+    summary:'点検中に支柱の下が緩いことを確認。「使わないで」のテープを貼り、修理をお願いした。',
+    evidence:'安全管理マニュアル 7-1「遊具の異常時」',
+    status:'review',
+    voice:'すべり台、足元がちょっとグラつく。今日は使わせない。修理をお願いしたい。',
+    overview:'いつもの点検で、園庭のすべり台の足元がぐらつくことを確認した。子どもが使っている最中ではなかった。',
+    response:'すぐに使わないようにし、「使わないで」の札とコーンを置いた。全クラスに口で伝えた。修理の見積もりは、園長の確認待ち。',
+    parentNote:'園庭のすべり台に不具合が見つかったため、修理まで使用を中止しています。外遊びは砂場や、ほかの遊具でします。',
+    photos:[
+      { src:'images/slide-wide.png', caption:'14:05 撮影 · 今日は使わないすべり台' },
+      { src:'images/slide-base.png', caption:'足元のボルトが緩い' }
+    ]
+  },
+  {
+    id:'ren-sand',
+    date:TODAY, dateLabel:'今日', time:'14:40',
+    child:'斎藤 れん', age:'3歳', className:'うさぎ組', teacher:'田中 美咲',
+    category:'園児', title:'砂場で右目に砂が入った', place:'園庭砂場',
+    summary:'目を洗ったあと、赤みも痛みもない。お迎えのときに話せばよい。保護者には伝えた。',
+    evidence:'安全管理マニュアル 3-4「目に異物が入ったとき」',
+    status:'notified',
+    voice:'れんくん、砂場で右目に砂。水道で洗った。こすらず、今は平気そう。',
+    overview:'14時40分ごろ、斎藤れんくん（うさぎ組）が砂場で右目に砂が入ったと知らせた。こする前に、こすらないよう声をかけた。',
+    response:'園の手順どおり、水道で目を洗った。目は赤くなく、涙もすぐ止まった。15分後に見ても変わりなし。電話するほどではない。',
+    parentNote:'砂場遊びの際に右目に砂が入り、すぐに水道で目を洗いました。その後の赤みや痛みはありません。お迎えの際にもご報告します。'
+  },
+  {
+    id:'daiki-fight',
+    date:TODAY, dateLabel:'今日', time:'15:20',
+    child:'中村 だいき', age:'5歳', className:'りす組', teacher:'加藤 直子',
+    category:'園児', title:'ブロックの取り合い。あいだに入った', place:'りす組保育室',
+    summary:'あかりちゃんとの取り合い。けがはない。お迎えのときに、両方の保護者へまだ話していない。',
+    evidence:'保育所保育指針 第2章-1「人と関わる力」／保護者への連絡の決まり 2-2',
+    status:'follow',
+    voice:'だいきくんとあかりちゃん、ブロックで言い合い。あいだに入った。けがはない。お迎えで両方の保護者に話したい。',
+    overview:'15時20分、中村だいきくん（りす組）と松本あかりちゃんがブロックの取り合いになり、大きな声で言い合いになった。手が出る前にあいだに入った。けがはない。',
+    response:'二人から話を聞き、順番の約束を再度確認した。落ち着いてから、いっしょに片付けた。お迎えのときの説明がまだなので、あとで確認する。',
+    parentNote:'本日、遊びの中でお友達とブロックの取り合いがありました。けがはなく、順番の約束を確認して落ち着いています。お迎えの際に、何があったかお話しします。'
+  },
+  {
+    id:'gate-stopper',
+    date:TODAY, dateLabel:'今日', time:'15:50',
+    child:'—', age:'', className:'設備', teacher:'高橋 誠',
+    category:'設備', title:'正門の止め金が折れている', place:'正門',
+    summary:'門の床ストッパーが折れていた。仮止めして、お迎えは職員が開け閉め。園長の確認待ち。',
+    evidence:'安全管理マニュアル 7-2「門・施錠の異常」',
+    status:'review',
+    voice:'正門のストッパー折れてる。テープで仮止めした。お迎えは大人が開け閉めする。',
+    overview:'15時50分、お迎えの準備中に正門の床ストッパーが折れているのを確認した。扉がしっかり止まらない。',
+    response:'テープで仮止めし、開け閉めは職員だけにした。保護者への引き渡しは門の内側。修理の手配は園長の確認待ち。',
+    parentNote:'正門のストッパーに不具合があるため、本日のお迎えは職員が門を開閉します。引き渡しの場所は変わりません。',
+    photos:[
+      { src:'images/gate-wide.png', caption:'15:50 撮影 · 正門と仮止め' },
+      { src:'images/gate-stopper.png', caption:'折れた床ストッパー' }
+    ]
+  },
+  {
+    id:'mio-faq',
+    date:TODAY, dateLabel:'今日', time:'16:05',
+    child:'伊藤 みお', age:'3歳', className:'うさぎ組', teacher:'田中 美咲',
+    category:'保護者', title:'保護者から「今夜のおかずは卵入る？」→担任が確認', place:'保護者からの質問',
+    summary:'チャットがアレルギーの一覧を見て答えた。担任が内容を確認し、問い合わせの記録に残した。',
+    evidence:'アレルギー対応の基準 4-1／今月献立表',
+    status:'notified',
+    voice:'',
+    overview:'保護者からの質問に「今夜のおかずには卵が入りますか」とあった。チャットが、アレルギーのある子どもの一覧と献立表を見て答えた。',
+    response:'担任が内容を見て、卵は使っておらず、みおちゃんはほかの子と同じ給食でよい、という内容に間違いがないことを確認した。問い合わせの記録に残した。',
+    parentNote:'本日の給食に卵は使っていません。みおちゃんはほかの子と同じ給食で大丈夫です。卵を抜く日は、献立表の印とアプリで知らせます。'
+  },
+  {
+    id:'akari-fever-y',
+    date:'2026-09-07', dateLabel:'昨日', time:'14:00',
+    child:'松本 あかり', age:'5歳', className:'りす組', teacher:'加藤 直子',
+    category:'園児', title:'熱38.1℃で早退', place:'りす組保育室',
+    summary:'測り直したら38.1℃。お母さんが14:40にお迎え。熱が下がって24時間は休む目安を伝えた。',
+    evidence:'安全管理マニュアル 5-1「発熱時対応」',
+    status:'notified',
+    voice:'あかりちゃん38.1。お母さん来るまで、別室で見ている。',
+    overview:'昨日14時、松本あかりちゃんの熱を測り直したら38.1℃。朝は36.7℃だった。',
+    response:'別室に移して、保護者に電話した。14:40にお母さんが迎え。熱が下がって24時間は休む目安を、話して紙でも渡した。',
+    parentNote:'38.1℃を確認したため、お迎えをお願いし、早退となりました。熱が下がってから24時間は、おうちで休む目安です。また来るときは、朝の熱を教えてください。'
+  },
+  {
+    id:'hana-pickup-y',
+    date:'2026-09-07', dateLabel:'昨日', time:'11:45',
+    child:'佐藤 はな', age:'1歳', className:'ひよこ組', teacher:'山本 恵',
+    category:'保護者', title:'お迎えをお父さんに変更', place:'電話',
+    summary:'11:45に電話。14時より前なので受け付け、お迎えの一覧を直した。',
+    evidence:'保護者への連絡の決まり 3-2',
+    status:'notified',
+    voice:'はなちゃん、今日はお父さんがお迎え。',
+    overview:'お母さんから、今日はお父さんがお迎え、と電話があった。',
+    response:'14時より前だったので受け付けた。お迎えの一覧と顔写真を確認できるように更新した。',
+    parentNote:'今日はお父さんのお迎えで受け付けました。'
+  },
+  {
+    id:'ren-insect',
+    date:'2026-09-06', dateLabel:'9/6', time:'15:20',
+    child:'斎藤 れん', age:'3歳', className:'うさぎ組', teacher:'田中 美咲',
+    category:'園児', title:'園庭で虫に刺された（右腕）', place:'園庭',
+    summary:'赤みは小さい。冷やした。かゆみ止めは、保護者に確認していないので塗っていない。',
+    evidence:'安全管理マニュアル 3-5「虫刺され」',
+    status:'notified',
+    voice:'れんくん、腕を蚊に刺された。冷やした。薬は塗ってない。',
+    overview:'外遊び中に右腕を虫に刺された。赤みは5ミリくらい。',
+    response:'冷やした。薬は、保護者に確認する前なので塗っていない。お迎えのときに説明し、わかってもらった。',
+    parentNote:'右腕に小さな虫刺されがありました。冷やして様子を見ています。かゆみが強いときは、おうちの薬などでみてください。'
+  },
+  {
+    id:'sandbox-fence',
+    date:'2026-09-05', dateLabel:'9/5', time:'09:30',
+    child:'—', age:'', className:'設備', teacher:'高橋 誠',
+    category:'設備', title:'砂場の木の柵が緩い', place:'園庭砂場',
+    summary:'ねじが2本緩い。その日のうちに締め直した。そのままで使ってよい。',
+    evidence:'安全管理マニュアル 7-1',
+    status:'notified',
+    voice:'砂場の柵、ねじが緩い。締め直した。',
+    overview:'朝の点検で砂場の柵のねじが2本緩いことを確認。',
+    response:'いったん使うのをやめて、締め直してから再開した。直した写真を、修理の記録に残した。',
+    parentNote:'砂場の柵のねじが緩んでいたので、締め直しました。いまは普段どおり使っています。'
+  },
+  {
+    id:'daiki-meeting',
+    date:'2026-09-04', dateLabel:'9/4', time:'16:10',
+    child:'中村 だいき', age:'5歳', className:'りす組', teacher:'加藤 直子',
+    category:'保護者', title:'保護者面談メモ（友だちとの関わりで、手が出てしまうことがある）', place:'相談室',
+    summary:'お母さんと短時間話した。家でも順番の練習をする。園でも様子を見る。',
+    evidence:'保護者への連絡の決まり 4-1「面談記録」',
+    status:'follow',
+    voice:'',
+    overview:'お迎え時にお母さんから「家でもきょうだいげんかが続く」との相談。園でも取り合いが増えている話とあわせて聞いた。',
+    response:'いつ何があったかを順に伝えた。園ではあいだに入り、順番が目で見てわかるようにすると説明した。1週間後に、その後の様子を伝える約束。あとで確認する。',
+    parentNote:'面談で聞いたことは、園の中で引き継ぎます。遊んでいるときの様子を、これから記録していきます。来週お迎えのときに、その後の様子をお伝えします。'
+  }
+];
+
+let boardGroup = 'class';
+let boardFilter = 'all';
+let selectedReportId = 'aoto-fall';
+
+function childLabel(r) {
+  if (r.category === '設備' || r.child === '—') return '設備';
+  return r.age ? `${r.child}（${r.age}）` : r.child;
+}
+function minutes(t) {
+  const [h,m] = t.split(':').map(Number);
+  return h * 60 + m;
+}
+function statusBadge(status) {
+  return `<span class="badge ${STATUS_BADGE[status]}">${STATUS_LABEL[status]}</span>`;
+}
+function catPill(cat) {
+  return `<span class="cat cat-${cat}">${cat}</span>`;
+}
+function todayRecords() {
+  return records.filter(r => r.date === TODAY).sort((a,b) => minutes(a.time) - minutes(b.time));
+}
+function needsAction(r) {
+  return r.status === 'review' || r.status === 'follow';
+}
+function setBoardFilter(next) {
+  if (next === 'all') boardFilter = 'all';
+  else boardFilter = boardFilter === next ? 'all' : next;
+  renderBoard();
+}
+function recordCard(r, opts = {}) {
+  const pending = r.status === 'review' ? ' is-pending' : r.status === 'follow' ? ' is-follow' : '';
+  const hideWho = opts.hideWho || boardGroup === 'child';
+  const who = r.category === '設備' ? '' : `<div class="rec-who"><b>${r.child}</b>${r.age ? '　' + r.age : ''}</div>`;
+  const placeTeacher = [r.place, r.teacher].filter(Boolean).join(' · ');
+  const hasPhoto = r.photos && r.photos[0];
+  const thumb = hasPhoto ? `<img class="rec-thumb" src="${r.photos[0].src}" alt="">` : '';
+  return `<button type="button" class="rec-card${pending}${hasPhoto?' has-photo':''}" onclick="openReport('${r.id}')">
+    ${thumb}
+    <div class="rec-body">
+    <div class="rec-card-top">
+      <span class="rec-time">${r.time}</span>
+      ${statusBadge(r.status)}
+    </div>
+    ${hideWho ? '' : who}
+    <div class="rec-title">${r.title}</div>
+    <div class="rec-card-top">
+      <span class="rec-sub">${placeTeacher}</span>
+      ${catPill(r.category)}
+    </div>
+    </div>
+  </button>`;
+}
+function renderGrouped(list) {
+  const groups = groupRecords(list, boardGroup);
+  if (boardGroup === 'class') {
+    const classGroups = CLASS_ORDER.filter(name => name !== '設備').map(name => ({
+      title: name,
+      items: (groups.find(g => g.title === name) || { items:[] }).items
+    })).filter(g => g.items.length);
+    const facility = groups.find(g => g.title === '設備');
+    const cols = `<div class="class-cols">${classGroups.map(g => `
+      <section class="class-col">
+        <div class="group-h">${g.title} <span>${g.items.length}</span></div>
+        <div class="row-list">${g.items.map(r => recordCard(r)).join('')}</div>
+      </section>
+    `).join('')}</div>`;
+    const fac = facility && facility.items.length ? `<div class="attn" style="margin-top:16px">
+      <div class="group-h">設備 <span>${facility.items.length}</span></div>
+      <div class="attn-grid">${facility.items.map(r => recordCard(r)).join('')}</div>
+    </div>` : '';
+    return cols + fac;
+  }
+  if (boardGroup === 'time') {
+    const am = list.filter(r => minutes(r.time) < 12 * 60);
+    const pm = list.filter(r => minutes(r.time) >= 12 * 60);
+    return `<div class="pair-cols">
+      <section class="class-col"><div class="group-h">午前 <span>${am.length}</span></div><div class="row-list">${am.map(r => recordCard(r)).join('')}</div></section>
+      <section class="class-col"><div class="group-h">午後 <span>${pm.length}</span></div><div class="row-list">${pm.map(r => recordCard(r)).join('')}</div></section>
+    </div>`;
+  }
+  const colClass = boardGroup === 'teacher' || groups.length <= 2 ? 'pair-cols' : 'class-cols';
+  return `<div class="${colClass}">${groups.map(g => `
+    <section class="class-col">
+      <div class="group-h">${g.title} <span>${g.items.length}</span></div>
+      <div class="row-list">${g.items.map(r => recordCard(r)).join('')}</div>
+    </section>
+  `).join('')}</div>`;
+}
+function renderBoard() {
+  const today = todayRecords();
+  const review = today.filter(r => r.status === 'review');
+  const follow = today.filter(r => r.status === 'follow');
+  document.getElementById('board-counts').innerHTML = `
+    <button type="button" class="count-chip warn${boardFilter==='review'?' on':''}" onclick="setBoardFilter('review')"><strong>${review.length}</strong><span class="chip-full"> 園長の確認待ち</span><span class="chip-short"> 確認</span></button>
+    <button type="button" class="count-chip follow${boardFilter==='follow'?' on':''}" onclick="setBoardFilter('follow')"><strong>${follow.length}</strong><span class="chip-full"> あとで確認</span><span class="chip-short"> あとで</span></button>
+    <button type="button" class="count-chip${boardFilter==='all'?' on':''}" onclick="setBoardFilter('all')"><strong>${today.length}</strong> 今日</button>
+  `;
+  const root = document.getElementById('board-root');
+  if (boardFilter === 'review' || boardFilter === 'follow') {
+    const list = boardFilter === 'review' ? review : follow;
+    root.innerHTML = `<div class="attn-grid">${list.map(r => recordCard(r)).join('')}</div>`;
+    return;
+  }
+  const action = today.filter(needsAction);
+  const rest = today.filter(r => !needsAction(r));
+  const attn = action.length ? `<section class="attn">
+    <div class="attn-h">確認してほしいこと <span>${action.length}</span></div>
+    <div class="attn-grid">${action.map(r => recordCard(r)).join('')}</div>
+  </section>` : '';
+  root.innerHTML = attn + renderGrouped(rest);
+}
+function groupRecords(list, mode) {
+  if (mode === 'time') {
+    return [{ title:'時刻順', items:list.slice() }];
+  }
+  const keyFn = {
+    class: r => r.className,
+    teacher: r => r.teacher,
+    child: r => childLabel(r)
+  }[mode];
+  const map = new Map();
+  list.forEach(r => {
+    const k = keyFn(r);
+    if (!map.has(k)) map.set(k, []);
+    map.get(k).push(r);
+  });
+  let keys = [...map.keys()];
+  if (mode === 'class') {
+    keys.sort((a,b) => {
+      const ia = CLASS_ORDER.indexOf(a);
+      const ib = CLASS_ORDER.indexOf(b);
+      return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+    });
+  } else {
+    keys.sort((a,b) => a.localeCompare(b, 'ja'));
+  }
+  return keys.map(k => ({ title:k, items:map.get(k) }));
+}
+function openReport(id) {
+  selectedReportId = id;
+  document.getElementById('page-reports')?.classList.add('detail-open');
+  showPage('reports');
+}
+function closeMobileDetail() {
+  document.getElementById('page-reports')?.classList.remove('detail-open');
+}
+
+document.getElementById('board-seg').addEventListener('click', (e) => {
+  const btn = e.target.closest('button[data-group]');
+  if (!btn) return;
+  boardGroup = btn.dataset.group;
+  document.querySelectorAll('#board-seg button').forEach(b => b.classList.toggle('active', b === btn));
+  renderBoard();
+});
+
+function filteredReports() {
+  const cat = document.getElementById('filter-cat')?.value || 'all';
+  const st = document.getElementById('filter-status')?.value || 'all';
+  return records.filter(r => {
+    if (cat !== 'all' && r.category !== cat) return false;
+    if (st !== 'all' && r.status !== st) return false;
+    return true;
+  }).sort((a,b) => (b.date + b.time).localeCompare(a.date + a.time));
+}
+function renderReports() {
+  const list = filteredReports();
+  if (!list.some(r => r.id === selectedReportId)) {
+    selectedReportId = list[0]?.id || '';
+  }
+  const listEl = document.getElementById('ledger-list');
+  const detailEl = document.getElementById('ledger-detail');
+  if (!list.length) {
+    listEl.innerHTML = '';
+    detailEl.innerHTML = '<div class="doc-empty">この条件では、記録がありません</div>';
+    return;
+  }
+  listEl.innerHTML = list.map(r => {
+    const thumb = (r.photos && r.photos[0]) ? `<img class="li-thumb" src="${r.photos[0].src}" alt="">` : '';
+    return `<button type="button" class="ledger-item${r.id===selectedReportId?' active':''}${thumb?' has-photo':''}" onclick="openReport('${r.id}')">
+      ${thumb}
+      <div class="li-body">
+        <div class="li-top">${catPill(r.category)}<span class="li-date">${r.dateLabel} ${r.time}</span></div>
+        <div class="li-title">${r.category==='設備' ? r.title : childLabel(r) + '　' + r.title}</div>
+        <div class="li-meta">${r.className !== '設備' ? r.className + ' · ' : ''}${r.teacher} · ${STATUS_LABEL[r.status]}</div>
+      </div>
+    </button>`;
+  }).join('');
+  const r = records.find(x => x.id === selectedReportId);
+  detailEl.innerHTML = renderDoc(r);
+}
+function renderDoc(r) {
+  const who = r.category === '設備' ? '—' : childLabel(r);
+  const voice = r.voice ? `<div class="voice-quote"><em>その場で話した内容</em>${r.voice}</div>` : '';
+  const photos = (r.photos && r.photos.length) ? `<div class="doc-photos">${r.photos.map(p => `<figure><img src="${p.src}" alt=""><figcaption>${p.caption}</figcaption></figure>`).join('')}</div>` : '';
+  return `<article class="doc-card">
+    <div class="doc-hd">
+      <div>
+        <button type="button" class="doc-back" onclick="closeMobileDetail()">← 一覧</button>
+        <h3>${r.title}</h3>
+        <p>${r.dateLabel} ${r.time} · ${r.className} · ${r.teacher}</p>
+      </div>
+      <div class="rec-flags">${catPill(r.category)}${statusBadge(r.status)}</div>
+    </div>
+    <div class="doc-body">
+      <div class="doc-grid">
+        <div><div class="k">だれ</div><div class="v">${who}</div></div>
+        <div><div class="k">場所</div><div class="v">${r.place}</div></div>
+        <div><div class="k">種類</div><div class="v">${r.category}</div></div>
+        <div><div class="k">確認した決まり</div><div class="v">${r.evidence || '—'}</div></div>
+      </div>
+      ${photos}
+      ${voice}
+      <div class="evidence-box"><span class="evidence-icon">📌</span>${r.evidence ? '確認した決まり：' + r.evidence : '園の決まりとの確認は、まだです。'}</div>
+      <div class="doc-sec"><strong>概要</strong>${r.overview}</div>
+      <div class="doc-sec"><strong>対応</strong>${r.response}</div>
+      <div class="doc-sec"><strong>保護者への連絡文</strong>${r.parentNote}</div>
+    </div>
+  </article>`;
+}
+
 window.addEventListener('hashchange', applyHash);
 applyHash();
 
@@ -966,18 +1660,18 @@ function toggleRecording() {
     btn.classList.remove('recording');
     btn.textContent = '🎙';
     statusBadge.className = 'badge badge-ok';
-    statusBadge.innerHTML = '<span class="dot"></span>待機中';
-    micText.textContent = '録音停止。デモシナリオを適用できます';
+    statusBadge.innerHTML = '<span class="dot"></span>準備OK';
+    micText.textContent = '録音を止めました。下のボタンで、記録を入れられます';
     document.getElementById('use-demo-hint').style.display = 'block';
   }
 }
 
 function useDemoTranscript() {
   const box = document.getElementById('transcript-box');
-  const text = '10時15分、A君、園庭でかけっこ中に転倒。右膝擦り傷。水道水で洗浄、絆創膏貼付。泣き止んで活動に戻る。';
+  const text = '10時15分、あおとくん、園庭でかけっこ中に転んだ。右ひざすり傷。水道で洗って、ばんそうこうを貼った。泣きやんで遊びに戻る。';
   box.className = 'transcribed has-text';
   document.getElementById('use-demo-hint').style.display = 'none';
-  document.getElementById('mic-text').textContent = '音声テキスト化 完了';
+  document.getElementById('mic-text').textContent = '文字にしました';
 
   let i = 0;
   box.textContent = '';
@@ -1018,17 +1712,17 @@ function showReport() {
 
 // --- CHAT ---
 const staffReplies = {
-  'この対応はルール上正しいですか？': ['安全管理マニュアル第3章の基準に照らすと、今回の対応は適切です。流水洗浄後に保護を行うのは正しい手順です。', '安全管理マニュアル 3-2「擦過傷の処置」'],
-  '保護者に電話すべきタイミングは？': ['軽度の擦過傷で本人が回復している場合は電話不要です。発熱・骨折疑い・本人が泣き止まない場合は即時連絡が必要です。', '保護者連絡ガイドライン 2-1「連絡基準」'],
-  'アレルギー児の給食対応ルールを教えて': ['除去食リストに基づき、該当食材を完全除去し専用トレイで提供します。提供前に複数職員でダブルチェックが必須です。', 'アレルギー対応基準書 4-1「除去食提供手順」'],
-  '発熱した場合の対応手順は？': ['37.5度以上を確認後、速やかに保護者へ連絡。隔離スペースで安静を保ちながらお迎えを待ちます。', '安全管理マニュアル 5-1「発熱時対応」'],
+  'この対応で、園の決まりは大丈夫ですか？': ['園のけがの決まりに照らすと、今回の対応で大丈夫です。水道で洗ったあとにばんそうこうを貼るのは、正しい手順です。', '安全管理マニュアル 3-2「すり傷の手当」'],
+  '保護者に電話すべきタイミングは？': ['軽いすり傷で、本人が落ち着いている場合は電話は不要です。熱、骨折かもしれないとき、本人が泣きやまないときは、すぐに連絡が必要です。', '保護者への連絡の決まり 2-1「連絡の目安」'],
+  'アレルギーのある子の給食の決まりは？': ['その子が食べられないものは入れず、名前付きのトレーで出します。出す前に、担任と調理で二人確認します。', 'アレルギー対応の基準 4-1「アレルギーの給食の出し方」'],
+  '発熱した場合の対応手順は？': ['37.5度以上を確認したら、すぐに保護者へ連絡します。ほかの子と離した静かな場所で、お迎えを待ちます。', '安全管理マニュアル 5-1「発熱時対応」'],
 };
 
 const parentReplies = {
-  'アレルギーの除去食はどうなりますか？': ['お子様のアレルギー情報に基づき、専用の除去食をご用意します。毎月の献立表と共に確認書をお渡ししますので、ご確認のうえご署名をお願いします。', 'アレルギー対応基準書 4-1'],
-  'お迎えの時間変更はいつまでに連絡すれば？': ['お迎え時間の変更は、<strong>当日14時まで</strong>にお電話またはアプリでご連絡ください。緊急の場合はいつでもお電話ください。', '保護者連絡ガイドライン 3-2'],
-  '発表会の持ち物は何ですか？': ['発表会の持ち物は、配布済みのお便りをご確認ください。主なものはお名前入りの衣装・上履き・カメラ（フラッシュ禁止）です。', '行事マニュアル 年間行事一覧'],
-  '熱が何度から連絡が来ますか？': ['37.5度以上の発熱が確認された場合、速やかにご連絡いたします。測定後10分以内にお電話します。', '安全管理マニュアル 5-1'],
+  'アレルギーの給食はどうなりますか？': ['アレルギーに合わせて、その食材を抜いた給食を用意します。毎月の献立表と一緒に確認書をお渡ししますので、目を通してサインをお願いします。', 'アレルギー対応の基準 4-1'],
+  'お迎えの時間変更はいつまでに連絡すれば？': ['お迎え時間の変更は、<strong>当日14時まで</strong>にお電話またはアプリでご連絡ください。急ぎの場合は、いつでもお電話ください。', '保護者への連絡の決まり 3-2'],
+  '発表会の持ち物は何ですか？': ['発表会の持ち物は、お渡ししているお便りに書いてあります。主なものは、お名前入りの衣装・上履き・カメラです。カメラは可。フラッシュは使わないでください。', '行事の決まり 年間行事一覧'],
+  '熱が何度から連絡が来ますか？': ['37.5度以上の熱が確認された場合、すぐにご連絡します。熱を測ってから、10分以内にお電話します。', '安全管理マニュアル 5-1'],
 };
 
 function sendStaffMsg() {
@@ -1038,7 +1732,7 @@ function sendStaffMsg() {
   addMsg('staff-msgs', q, 'user');
   input.value = '';
   setTimeout(()=>{
-    const reply = staffReplies[q] || ['ご質問ありがとうございます。園のルールに基づいて確認中です...', null];
+    const reply = staffReplies[q] || ['確認します。園の決まりを見てから答えます。', null];
     addBotMsg('staff-msgs', reply[0], reply[1]);
   }, 600);
 }
@@ -1050,7 +1744,7 @@ function sendParentMsg() {
   addMsg('parent-msgs', q, 'user');
   input.value = '';
   setTimeout(()=>{
-    const reply = parentReplies[q] || ['ご質問ありがとうございます。担当者より折り返しご連絡いたします。', null];
+    const reply = parentReplies[q] || ['担任から、あとでご連絡します。', null];
     addBotMsg('parent-msgs', reply[0], reply[1]);
   }, 700);
 }
